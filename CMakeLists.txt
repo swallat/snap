@@ -94,8 +94,8 @@ set(SNAP_CORE_HDR
 ## lib
 add_library(snap SHARED ./snap-core/Snap.cpp)
 target_include_directories(snap PUBLIC glib-core snap-core)
-install(FILES ${GLIB_CORE_HDR} DESTINATION ${CMAKE_INSTALL_PREFIX}/include/glib-core)
-install(FILES ${SNAP_CORE_HDR} DESTINATION ${CMAKE_INSTALL_PREFIX}/include/snap-core)
+install(FILES ${GLIB_CORE_HDR} DESTINATION ${CMAKE_INSTALL_PREFIX}/include/snap/glib-core)
+install(FILES ${SNAP_CORE_HDR} DESTINATION ${CMAKE_INSTALL_PREFIX}/include/snap/snap-core)
 install(TARGETS snap LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
 
 ## tutorials
