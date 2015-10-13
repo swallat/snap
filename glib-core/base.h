@@ -6,8 +6,13 @@
 #if defined (_WIN32)
   #define GLib_WIN
   #define GLib_WIN32
+#if defined(__MINGW64__)
+  #define GLib_MINGW64
+#elif defined(__MINGW32__)
+  #define GLibe_MINGW32
+#endif
 #elif defined (__WIN64)
-#define GLib_WIN
+  #define GLib_WIN
   #define GLib_WIN64
 #elif defined(__linux__)
   #define GLib_UNIX
@@ -23,9 +28,6 @@
 #elif defined(__CYGWIN__)
   #define GLib_UNIX
   #define GLib_CYGWIN
-#elif defined(__MINGW64__)
-  #define GLib_UNIX
-  #define GLib_MINGW64
 #elif (defined(__APPLE__) && defined(__MACH__))
   #define GLib_UNIX
   #define GLib_MACOSX
@@ -84,7 +86,7 @@
 // word size
 #if __WORDSIZE == 32 || defined(GLib_WIN32) || defined(__CYGWIN32__)
   #define GLib_32Bit
-#elif __WORDSIZE == 64 || defined(GLib_WIN64) || defined(__CYGWIN64__)
+#elif __WORDSIZE == 64 || defined(GLib_WIN64) || defined(__CYGWIN64__) || defined(__MINGW64__)
   #define GLib_64Bit
 #else
   #error "Undefined word size"

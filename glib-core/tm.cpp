@@ -415,7 +415,7 @@ bool TSecTm::GetTmSec(struct tm& Tm, uint& AbsSec) {
 
 bool TSecTm::GetTmStruct(const uint& AbsSec, struct tm& Tm) {
   const time_t TimeT = time_t(AbsSec);
-  #if defined(GLib_MSC)
+  #if defined(GLib_MSC) || defined(GLib_MINGW64)
   return _gmtime64_s(&Tm, &TimeT) == 0;
   #elif defined(GLib_BCB)
   Tm=*gmtime(&TimeT); return true;
