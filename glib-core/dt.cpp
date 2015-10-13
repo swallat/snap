@@ -291,7 +291,7 @@ void TMem::Del(const int& BChN, const int& EChN){
 void TMem::AddBf(const void* _Bf, const int& _BfL){
 	IAssert((_BfL>=0) && (_Bf != NULL));
   Reserve(Len() + _BfL, false);
-  memcpy(Bf + BfL, _Bf, _BfL);  
+  memcpy(Bf + BfL, _Bf, _BfL);
    BfL+=_BfL;
   //char* ChBf=(char*)Bf;
   //for (int BfC=0; BfC<BfL; BfC++){
@@ -1750,14 +1750,14 @@ TStrPool64::TStrPool64(::TSize _MxBfL, ::TSize _GrowBy):
   AddStr("");
 }
 
-TStrPool64::TStrPool64(const TStrPool64& StrPool): 
+TStrPool64::TStrPool64(const TStrPool64& StrPool):
   MxBfL(StrPool.MxBfL), BfL(StrPool.BfL), GrowBy(StrPool.GrowBy) {
   if (Bf != NULL) { free(Bf); } else { IAssert(MxBfL == 0); }
-  Bf = (char*)malloc(StrPool.MxBfL); IAssert(Bf != NULL); 
+  Bf = (char*)malloc(StrPool.MxBfL); IAssert(Bf != NULL);
   memcpy(Bf, StrPool.Bf, BfL);
 }
 
-TStrPool64::TStrPool64(TSIn& SIn, bool LoadCompact): 
+TStrPool64::TStrPool64(TSIn& SIn, bool LoadCompact):
   MxBfL(0), BfL(0), GrowBy(0), Bf(0) {
   uint64 _GrowBy, _MxBfL, _BfL;
   SIn.Load(_GrowBy); SIn.Load(_MxBfL); SIn.Load(_BfL);
@@ -1779,18 +1779,18 @@ TStrPool64& TStrPool64::operator=(const TStrPool64& StrPool) {
   if (this != &StrPool) {
   GrowBy = StrPool.GrowBy;  MxBfL = StrPool.MxBfL;  BfL = StrPool.BfL;
   if (Bf != NULL) { free(Bf); } else { IAssert(MxBfL == 0); }
-  Bf = (char*)malloc(MxBfL); IAssert(Bf != NULL); 
+  Bf = (char*)malloc(MxBfL); IAssert(Bf != NULL);
   memcpy(Bf, StrPool.Bf, BfL);
   }
   return *this;
 }
 
-void TStrPool64::Clr(bool DoDel) { 
-  BfL = 0; 
-  if (DoDel && (Bf!=NULL)) { 
-    free(Bf); 
-    Bf = NULL; MxBfL = 0; 
-  } 
+void TStrPool64::Clr(bool DoDel) {
+  BfL = 0;
+  if (DoDel && (Bf!=NULL)) {
+    free(Bf);
+    Bf = NULL; MxBfL = 0;
+  }
 }
 
 uint64 TStrPool64::AddStr(const TStr& Str) {
@@ -2128,7 +2128,7 @@ bool TUInt::IsIpv6Str(const TStr& IpStr, const char& SplitCh) {
 	for (int IpStrN = 0; IpStrN < IpStrV.Len(); IpStrN++) {
 		if (IpStrV[IpStrN].Empty()) { continue; }
 		if (IpStrV[IpStrN].IsHexInt(true, 0x0000, 0xFFFF, Group)) { continue; }
-		return false; 
+		return false;
 	}
 	// all fine
 	return true;
@@ -2137,7 +2137,7 @@ bool TUInt::IsIpv6Str(const TStr& IpStr, const char& SplitCh) {
 /////////////////////////////////////////////////
 // Unsigned-Integer-64Bit
 
-#if defined (GLib_WIN32)
+#if (defined (GLib_WIN32) && ! defined(GLib_MINGW64))
 const TUInt64 TUInt64::Mn(uint64(0x0000000000000000i64));
 const TUInt64 TUInt64::Mx(uint64(0xFFFFFFFFFFFFFFFFi64));
 #elif defined (GLib_BCB)

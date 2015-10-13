@@ -24,8 +24,8 @@
   #define GLib_UNIX
   #define GLib_CYGWIN
 #elif defined(__MINGW64__)
-#define GLib_UNIX
-#define GLib_CYGWIN
+  #define GLib_UNIX
+  #define GLib_MINGW64
 #elif (defined(__APPLE__) && defined(__MACH__))
   #define GLib_UNIX
   #define GLib_MACOSX
